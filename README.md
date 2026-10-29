@@ -1,125 +1,210 @@
-#  Cross-Platform Engagement Analysis  
-###  Reddit × Google Trends Data Analytics Project
+::: {align="center"}
+# Cross-Platform Engagement Analysis
 
----
+### Reddit × Google Trends Data Analytics
 
-##  Overview
+**Connecting public search interest with community engagement**
 
-This project analyzes the relationship between **public search interest (Google Trends)** and **community engagement (Reddit)** across multiple domains such as Technology, Healthcare, Sports, and Politics.
+[Overview](#overview) · [Dashboard](#dashboard-highlights) ·
+[Methodology](#methodology) · [Key Insights](#key-insights) · [Tech
+Stack](#technology-stack)
+:::
 
-It helps answer:
--  What people are searching for (Demand)  
--  How communities are engaging (Activity)  
--  Where demand and engagement are misaligned  
+![Project banner](assets/project-banner.png)
 
----
+## Overview
 
-##  Objectives
+This project explores the relationship between **public search interest
+on Google Trends** and **community engagement on Reddit** across
+multiple domains, including Technology, Healthcare, Sports, Science, and
+Politics & Society.
 
-- Compare **public interest vs community engagement**
-- Identify **high-demand but under-served domains**
-- Analyze **engagement quality and virality**
-- Study **time-based engagement patterns**
-- Build a **cross-platform analytical framework**
+The analysis brings two signals together to investigate what people
+search for, how communities respond, and where search interest and
+Reddit activity may not align.
 
----
+### Questions explored
 
-##  Data Collection
+-   Which domains attract the strongest Reddit engagement?
+-   How does public search interest compare with community activity?
+-   Which domains show high engagement or viral-post activity?
+-   How do engagement patterns change over time?
+-   Where might there be gaps between search interest and community
+    engagement?
 
-### 🔹 Reddit Data
-- Collected **9,000+ posts** using Reddit Public API (Python)
-- Implemented:
-  - Pagination handling  
-  - Rate limiting  
-- Extracted:
-  - Score (upvotes)  
-  - Comments  
-  - Subreddit & Domain  
-  - Timestamp  
+## Dashboard Highlights
 
-### 🔹 Google Trends Data
-- Collected **domain-wise search interest**
-- Represents **public demand signal**
-- Granularity: **daily data**
+### 1. Engagement Overview
 
----
+A high-level view of the dataset, total engagement, average engagement
+per post, and top-performing domains.
 
-##  Data Preprocessing
+![Engagement overview](assets/engagement-overview.png)
 
-- Cleaned and standardized datasets  
-- Removed duplicates and null values  
-- Converted timestamps to usable formats  
-- Aggregated Reddit data:
-  - **Post-level → Domain + Date level**
-- Aligned both datasets on:
-  - **Domain + Date**
+### 2. Domain Performance Analysis
 
----
+Compares engagement across domains and highlights differences in average
+engagement, comments, and viral-post performance.
 
-##  Feature Engineering
+![Domain performance](assets/domain-performance.png)
 
-Created key metrics:
+### 3. Engagement Quality and Virality
 
-- **Engagement Score**  
-  `Score + 2 × Comments`
+Explores engagement distribution, viral-post patterns, and how
+engagement quality varies by domain.
 
-- **Engagement Buckets**  
-  Low / Medium / High / Very High  
+![Engagement quality and
+virality](assets/engagement-quality-virality.png)
 
-- **Demand Index**  
-  Based on Google Trends  
+![Virality breakdown](assets/virality-breakdown.png)
 
-- **Supply Index**  
-  Posting activity per domain  
+### 4. Time Intelligence
 
-- **Interest–Activity Gap**  
-  Difference between demand and engagement  
+Examines daily and hourly engagement patterns to identify when Reddit
+activity changes.
 
----
+![Time intelligence](assets/time-intelligence.png)
 
-##  Dashboard & Analysis (Power BI)
+![Time and domain comparison](assets/time-domain-comparison.png)
 
-Developed an interactive dashboard including:
+### 5. Public Interest vs. Community Engagement
 
-### 🔹 Public Interest vs Engagement
-- Scatter analysis of Google vs Reddit signals  
+Compares Google Trends search-interest signals with Reddit engagement to
+identify domains where the two signals differ.
 
-### 🔹 Demand–Supply Gap
-- Identifies under-served domains  
+![Public interest versus
+engagement](assets/public-interest-vs-engagement.png)
 
-### 🔹 Time Intelligence
-- Daily and hourly engagement patterns  
+### 6. Interest--Activity Gap Analysis
 
-### 🔹 Engagement Quality & Virality
-- High engagement % and viral content distribution  
+Highlights differences between search interest and Reddit activity at
+the domain level. These gaps can help identify areas for further
+investigation rather than serving as a direct measure of unmet demand.
 
-### 🔹 Domain Performance
-- Comparative analysis across domains  
+![Interest activity gap](assets/interest-activity-gap.png)
 
----
+## Data Collection
 
-##  Key Insights
+### Reddit
 
--  **Technology & Healthcare**  
-  High search demand but lower engagement → opportunity areas  
+Collected **9,000+ Reddit posts** using the Reddit Public API with
+Python.
 
--  **Sports & Science**  
-  High engagement and strong virality  
+Fields included: - Post score (upvotes) - Comment count - Subreddit and
+domain - Timestamp
 
--  **Politics & Society**  
-  Discussion-driven engagement  
+The collection process included pagination handling and rate limiting.
 
--  Engagement varies significantly by **time and posting behavior**  
+### Google Trends
 
----
+Collected daily, domain-level search-interest data to represent public
+interest over time.
 
-##  Tech Stack
+## Methodology
 
-- Python (Pandas, NumPy)  
-- Power BI  
-- DAX  
-- REST APIs (Reddit)  
+### 1. Data preprocessing
 
----
+-   Cleaned and standardized both datasets.
+-   Removed duplicate and null records.
+-   Converted timestamps into usable date/time fields.
+-   Aggregated Reddit activity from post level to **domain + date**
+    level.
+-   Aligned Reddit and Google Trends data using **domain and date**.
 
+### 2. Feature engineering
 
+  -----------------------------------------------------------------------
+  Metric                              Definition / purpose
+  ----------------------------------- -----------------------------------
+  Engagement Score                    `Score + (2 × Comments)`
+
+  Engagement Buckets                  Groups posts into Low, Medium,
+                                      High, and Very High engagement
+
+  Demand Index                        Represents relative search interest
+                                      from Google Trends
+
+  Supply Index                        Represents posting activity by
+                                      domain
+
+  Interest--Activity Gap              Compares search-interest and
+                                      engagement signals to identify
+                                      potential misalignment
+  -----------------------------------------------------------------------
+
+*Note: The Demand Index, Supply Index, and Interest--Activity Gap are
+project-defined analytical measures. Their interpretation depends on the
+normalization and calculation used in the underlying model.*
+
+### 3. Data modeling and dashboarding
+
+Built an interactive Power BI dashboard with separate fact tables and
+shared domain/date dimensions. Used Power Query for data preparation and
+DAX for analytical measures and KPIs.
+
+![Power BI data model](assets/power-bi-data-model.png)
+
+## Key Insights
+
+-   **Sports** showed strong average engagement and viral-post
+    performance in the dashboard.
+-   **Technology and Healthcare** showed areas where search interest and
+    Reddit engagement differed, warranting further investigation.
+-   **Politics & Society** showed discussion-driven engagement patterns.
+-   Engagement varied across domains and time periods, making time-based
+    and domain-level comparisons useful.
+
+The findings describe patterns in the collected data and should not be
+interpreted as proof of causation or as a direct measure of real-world
+demand.
+
+## Technology Stack
+
+-   **Languages & data processing:** Python, Pandas, NumPy
+-   **Data source / APIs:** Reddit Public API, Google Trends
+-   **BI & visualization:** Power BI
+-   **Data preparation:** Power Query
+-   **Analytics:** DAX, feature engineering, time-based analysis
+
+## Skills Demonstrated
+
+-   API-based data collection
+-   Data cleaning and transformation
+-   Data aggregation and feature engineering
+-   Dimensional data modeling
+-   KPI development with DAX
+-   Cross-platform trend analysis
+-   Interactive dashboard design
+-   Analytical insight communication
+
+## Repository Structure
+
+``` text
+cross-platform-engagement-analysis/
+├── README.md
+└── assets/
+    ├── project-banner.png
+    ├── engagement-overview.png
+    ├── domain-performance.png
+    ├── engagement-quality-virality.png
+    ├── virality-breakdown.png
+    ├── time-intelligence.png
+    ├── public-interest-vs-engagement.png
+    ├── interest-activity-gap.png
+    ├── time-domain-comparison.png
+    └── power-bi-data-model.png
+```
+
+## Conclusion
+
+This project combines public search-interest data and Reddit community
+activity in a single analytical framework. By preparing and aligning
+data from two platforms, creating domain-level metrics, and building an
+interactive Power BI dashboard, it supports structured exploration of
+engagement, virality, and changes in audience interest.
+
+------------------------------------------------------------------------
+
+::: {align="center"}
+**Cross-Platform Engagement Analysis \| Reddit × Google Trends**
+:::
